@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.HtSysusersMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.HtSysusers">
+    <id column="uno" jdbcType="INTEGER" property="uno" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="upwd" jdbcType="VARCHAR" property="upwd" />
+    <result column="rno" jdbcType="INTEGER" property="rno" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ht_sysusers
+    where uno = #{uno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drivers.demo.entity.HtSysusers">
+    insert into ht_sysusers (uno, uname, upwd, 
+      rno)
+    values (#{uno,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{upwd,jdbcType=VARCHAR}, 
+      #{rno,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.drivers.demo.entity.HtSysusers">
+    update ht_sysusers
+    set uname = #{uname,jdbcType=VARCHAR},
+      upwd = #{upwd,jdbcType=VARCHAR},
+      rno = #{rno,jdbcType=INTEGER}
+    where uno = #{uno,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select uno, uname, upwd, rno
+    from ht_sysusers
+    where uno = #{uno,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select uno, uname, upwd, rno
+    from ht_sysusers
+  </select>
+</mapper>

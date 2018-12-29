@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.CoachMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.Coach">
+    <id column="coachno" jdbcType="INTEGER" property="coachno" />
+    <result column="fullname" jdbcType="VARCHAR" property="fullname" />
+    <result column="userpwd" jdbcType="VARCHAR" property="userpwd" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="mailbox" jdbcType="VARCHAR" property="mailbox" />
+    <result column="documentno" jdbcType="INTEGER" property="documentno" />
+    <result column="idno" jdbcType="VARCHAR" property="idno" />
+    <result column="headimg" jdbcType="VARCHAR" property="headimg" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="registertime" jdbcType="TIMESTAMP" property="registertime" />
+    <result column="schoolno" jdbcType="INTEGER" property="schoolno" />
+    <result column="avgstar" jdbcType="DECIMAL" property="avgstar" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from coach
+    where coachno = #{coachno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drivers.demo.entity.Coach">
+    insert into coach (coachno, fullname, userpwd, 
+      sex, phone, mailbox, 
+      documentno, idno, headimg, 
+      address, registertime, schoolno, 
+      avgstar, state)
+    values (#{coachno,jdbcType=INTEGER}, #{fullname,jdbcType=VARCHAR}, #{userpwd,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mailbox,jdbcType=VARCHAR}, 
+      #{documentno,jdbcType=INTEGER}, #{idno,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{registertime,jdbcType=TIMESTAMP}, #{schoolno,jdbcType=INTEGER}, 
+      #{avgstar,jdbcType=DECIMAL}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.drivers.demo.entity.Coach">
+    update coach
+    set fullname = #{fullname,jdbcType=VARCHAR},
+      userpwd = #{userpwd,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      mailbox = #{mailbox,jdbcType=VARCHAR},
+      documentno = #{documentno,jdbcType=INTEGER},
+      idno = #{idno,jdbcType=VARCHAR},
+      headimg = #{headimg,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      registertime = #{registertime,jdbcType=TIMESTAMP},
+      schoolno = #{schoolno,jdbcType=INTEGER},
+      avgstar = #{avgstar,jdbcType=DECIMAL},
+      state = #{state,jdbcType=VARCHAR}
+    where coachno = #{coachno,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select coachno, fullname, userpwd, sex, phone, mailbox, documentno, idno, headimg, 
+    address, registertime, schoolno, avgstar, state
+    from coach
+    where coachno = #{coachno,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select coachno, fullname, userpwd, sex, phone, mailbox, documentno, idno, headimg, 
+    address, registertime, schoolno, avgstar, state
+    from coach
+  </select>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+    <!-- mysql jar 文件位置 -->
+    <classPathEntry location="D:/maven/localRepository/mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar" />
+    <context id="store" targetRuntime="MyBatis3Simple">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+            <!-- 是否去除所有自动生成的文件的时间戳，默认为false -->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/drivers?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"
+                        userId="root"
+                        password="qwe123">
+        </jdbcConnection>
+        <!-- targetPackage:包名称(自定义)  targetProject：项目路径(自定义)   -->
+        <!--定义model的包名称-->
+        <javaModelGenerator targetPackage="com.drivers.demo.entity" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 从数据库返回的值被清理前后的空格  -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 配置生成相应的实体Mapper.xml，对于Mapper3.X我们需要把type="XMLMAPPER" -->
+        <!-- targetPackage:包名称(自定义)  targetProject：项目路径(自定义)   -->
+        <sqlMapGenerator targetPackage="com.drivers.demo.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <!-- 配置生成相应的接口类，对应与Mapper.xml中的一系列CRUD方法SQL语句 -->
+        <!-- targetPackage:包名称(自定义)  targetProject：项目路径(自定义)   -->
+        <javaClientGenerator targetPackage="com.drivers.demo.dao" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <!-- 要生成的表 -->
+        <!--<table schema="SSMBlog" tableName="coach"></table>
+        <table schema="SSMBlog" tableName="coachassess"></table>
+        <table schema="SSMBlog" tableName="documenttype"></table>
+        <table schema="SSMBlog" tableName="driverschool"></table>
+        <table schema="SSMBlog" tableName="driverstype"></table>
+        <table schema="SSMBlog" tableName="mealtype"></table>
+        <table schema="SSMBlog" tableName="procity"></table>
+        <table schema="SSMBlog" tableName="schoolassess"></table>
+        <table schema="SSMBlog" tableName="signup"></table>
+        <table schema="SSMBlog" tableName="study"></table>
+        <table schema="SSMBlog" tableName="subjects"></table>
+        <table schema="SSMBlog" tableName="userinfo"></table>-->
+
+        <table schema="SSMBlog" tableName="ht_roles"></table>
+        <table schema="SSMBlog" tableName="ht_relationship"></table>
+        <table schema="SSMBlog" tableName="ht_sysusers"></table>
+        <table schema="SSMBlog" tableName="ht_privilegs"></table>
+    </context>
+</generatorConfiguration>

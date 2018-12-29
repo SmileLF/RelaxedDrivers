@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.SignupMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.Signup">
+    <id column="signo" jdbcType="INTEGER" property="signo" />
+    <result column="userno" jdbcType="INTEGER" property="userno" />
+    <result column="driverno" jdbcType="INTEGER" property="driverno" />
+    <result column="schoolno" jdbcType="INTEGER" property="schoolno" />
+    <result column="mealno" jdbcType="INTEGER" property="mealno" />
+    <result column="paytype" jdbcType="VARCHAR" property="paytype" />
+    <result column="sigtime" jdbcType="TIMESTAMP" property="sigtime" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from signup
+    where signo = #{signo,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drivers.demo.entity.Signup">
+    insert into signup (signo, userno, driverno, 
+      schoolno, mealno, paytype, 
+      sigtime, state)
+    values (#{signo,jdbcType=INTEGER}, #{userno,jdbcType=INTEGER}, #{driverno,jdbcType=INTEGER}, 
+      #{schoolno,jdbcType=INTEGER}, #{mealno,jdbcType=INTEGER}, #{paytype,jdbcType=VARCHAR}, 
+      #{sigtime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.drivers.demo.entity.Signup">
+    update signup
+    set userno = #{userno,jdbcType=INTEGER},
+      driverno = #{driverno,jdbcType=INTEGER},
+      schoolno = #{schoolno,jdbcType=INTEGER},
+      mealno = #{mealno,jdbcType=INTEGER},
+      paytype = #{paytype,jdbcType=VARCHAR},
+      sigtime = #{sigtime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=VARCHAR}
+    where signo = #{signo,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select signo, userno, driverno, schoolno, mealno, paytype, sigtime, state
+    from signup
+    where signo = #{signo,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select signo, userno, driverno, schoolno, mealno, paytype, sigtime, state
+    from signup
+  </select>
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.HtRelationshipMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.HtRelationship">
+    <id column="reno" jdbcType="INTEGER" property="reno" />
+    <result column="rno" jdbcType="INTEGER" property="rno" />
+    <result column="pno" jdbcType="INTEGER" property="pno" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ht_relationship
+    where reno = #{reno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drivers.demo.entity.HtRelationship">
+    insert into ht_relationship (reno, rno, pno
+      )
+    values (#{reno,jdbcType=INTEGER}, #{rno,jdbcType=INTEGER}, #{pno,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.drivers.demo.entity.HtRelationship">
+    update ht_relationship
+    set rno = #{rno,jdbcType=INTEGER},
+      pno = #{pno,jdbcType=INTEGER}
+    where reno = #{reno,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select reno, rno, pno
+    from ht_relationship
+    where reno = #{reno,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select reno, rno, pno
+    from ht_relationship
+  </select>
+</mapper>

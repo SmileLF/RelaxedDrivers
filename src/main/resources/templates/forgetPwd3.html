@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Author" contect="http://www.webqin.net">
+    <title>忘记密码</title>
+    <link rel="shortcut icon" href="//img.58cdn.com.cn/jxedt/logos/favicon.ico?v=20180725" />
+    <link rel="stylesheet" href="//j1.58cdn.com.cn/dist/jxedt/pc/lib/css/reset.css?v=20180725">
+    <link rel="stylesheet" href="//c.58cdn.com.cn/dist/jxedt/pc/products/jxregister/css/registration.css?v=20181130">
+    <link type="text/css" href="/css/css.css" rel="stylesheet" />
+    <style type="text/css">
+        body{
+            background:rgb(235, 247, 252);
+        }
+        a{
+            font-size: 20px;
+            color:#0000CC;
+        }
+        a:hover{
+            color:	#FF3333;
+        }
+        #showtime{
+            font-size: 18px;
+        }
+    </style>
+    <script type="text/javascript">
+        var t=3;
+        var res;
+        function time(){
+            document.all.showtime.innerHTML=t;
+            if(t==0){
+                window.location.href="/userinfo/checklogin";
+                clearTimeout(res);
+            }
+            t--;
+        }
+        res=setInterval(time,1000);
+        window.onload(time());
+    </script>
+</head>
+
+<body>
+<div class="registration">
+    <nav>
+        <div class="login-guide-nav">
+            <div class="nav-logo">
+                <a href="http://www.jxedt.com">
+                    <img src="//img.58cdn.com.cn/dist/jxedt/pc/products/jxregister/images/logo.png?v=20180725" alt="">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="for-liucheng">
+            <div class="liulist for-cur"></div>
+            <div class="liulist for-cur"></div>
+            <div class="liulist for-cur"></div>
+            <div class="liutextbox">
+                <div class="liutext for-cur"><em>1</em><br /><strong>填写验证信息</strong></div>
+                <div class="liutext for-cur"><em>2</em><br /><strong>设置新密码</strong></div>
+                <div class="liutext for-cur"><em>3</em><br /><strong>完成</strong></div>
+            </div>
+        </div><!--for-liucheng/-->
+        <div class="successs">
+            <h3>恭喜您，修改成功！</h3>
+            <i id="showtime"></i><a href="/userinfo/checklogin">返回登录-->></a>
+        </div>
+    </div><!--web-width/-->
+</div><!--content/-->
+</body>
+</html>

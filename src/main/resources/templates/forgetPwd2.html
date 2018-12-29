@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org"/>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--<meta name="Author" contect="http://www.webqin.net">-->
+    <title>忘记密码</title>
+    <link rel="shortcut icon" href="//img.58cdn.com.cn/jxedt/logos/favicon.ico?v=20180725" />
+    <link rel="stylesheet" href="//j1.58cdn.com.cn/dist/jxedt/pc/lib/css/reset.css?v=20180725">
+    <link rel="stylesheet" href="//c.58cdn.com.cn/dist/jxedt/pc/products/jxregister/css/registration.css?v=20181130">
+    <link type="text/css" href="/css/css.css" rel="stylesheet" />
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <style type="text/css">
+        .registration{
+            background:rgb(235, 247, 252);
+        }
+        i{
+            color:red;
+        }
+    </style>
+    <script type="text/javascript">
+        function test(){
+            var p1=$("#pwd").val();
+            var p2=$("#repwd").val();
+            if(""==p1 || null==p1 & ""==p2 || null==p2){
+                $("#errorpwd").html("请输入密码");
+                $("#errorrepwd").html("请输入密码");
+            }else{
+                $("#errorpwd").html("");
+                $("#errorrepwd").html("");
+                if(p1!=p2){
+                    $("#errorrepwd").html("密码不一致");
+                }else{
+                    $("#frm").submit();
+                }
+            }
+
+        };
+    </script>
+</head>
+
+<body>
+<div class="registration">
+    <nav>
+        <div class="login-guide-nav">
+            <div class="nav-logo">
+                <a href="http://www.jxedt.com">
+                    <img src="//img.58cdn.com.cn/dist/jxedt/pc/products/jxregister/images/logo.png?v=20180725" alt="">
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="content">
+        <div class="web-width">
+            <div class="for-liucheng">
+                <div class="liulist for-cur"></div>
+                <div class="liulist for-cur"></div>
+                <div class="liulist"></div>
+                <div class="liutextbox">
+                    <div class="liutext for-cur"><em>1</em><br /><strong>填写验证信息</strong></div>
+                    <div class="liutext for-cur"><em>2</em><br /><strong>设置新密码</strong></div>
+                    <div class="liutext"><em>3</em><br /><strong>完成</strong></div>
+                </div>
+            </div><!--for-liucheng/-->
+            <form action="/userinfo/updatepwd" method="post" class="forget-pwd" id="frm">
+                <dl>
+                    <dt>新密码：</dt>
+                    <dd><input type="password" name="newpwd" id="pwd"/><i id="errorpwd"></i></dd>
+                    <input type="hidden" th:value="${uinfo.userno }" name="userno"/>
+                </dl>
+                <dl>
+                    <dt>确认密码：</dt>
+                    <dd><input type="password" id="repwd"/><i id="errorrepwd"></i></dd>
+                    <div class="clears"></div>
+                </dl>
+                <div class="subtijiao"><input type="button" value="提交" onclick="test()"/></div>
+            </form><!--forget-pwd/-->
+        </div><!--web-width/-->
+    </div><!--content/-->
+</div>
+</body>
+</html>

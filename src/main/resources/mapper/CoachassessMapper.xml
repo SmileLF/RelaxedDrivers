@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.CoachassessMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.Coachassess">
+    <id column="assessno" jdbcType="INTEGER" property="assessno" />
+    <result column="coachno" jdbcType="INTEGER" property="coachno" />
+    <result column="appraiser" jdbcType="INTEGER" property="appraiser" />
+    <result column="star" jdbcType="DECIMAL" property="star" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from coachassess
+    where assessno = #{assessno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drivers.demo.entity.Coachassess">
+    insert into coachassess (assessno, coachno, appraiser, 
+      star, time, content, 
+      state)
+    values (#{assessno,jdbcType=INTEGER}, #{coachno,jdbcType=INTEGER}, #{appraiser,jdbcType=INTEGER}, 
+      #{star,jdbcType=DECIMAL}, #{time,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.drivers.demo.entity.Coachassess">
+    update coachassess
+    set coachno = #{coachno,jdbcType=INTEGER},
+      appraiser = #{appraiser,jdbcType=INTEGER},
+      star = #{star,jdbcType=DECIMAL},
+      time = #{time,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where assessno = #{assessno,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select assessno, coachno, appraiser, star, time, content, state
+    from coachassess
+    where assessno = #{assessno,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select assessno, coachno, appraiser, star, time, content, state
+    from coachassess
+  </select>
+</mapper>

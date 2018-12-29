@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.UserinfoMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.Userinfo">
+    <id column="userno" jdbcType="INTEGER" property="userno" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="userpwd" jdbcType="VARCHAR" property="userpwd" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="mailbox" jdbcType="VARCHAR" property="mailbox" />
+    <result column="documentno" jdbcType="INTEGER" property="documentno" />
+    <result column="idno" jdbcType="VARCHAR" property="idno" />
+    <result column="headimg" jdbcType="VARCHAR" property="headimg" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="registertime" jdbcType="TIMESTAMP" property="registertime" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="column">
+    userno,nickname,userpwd,sex,phone,mailbox,documentno,idno,headimg,address,registertime,state,pro,city
+  </sql>
+  <insert id="insert">
+    insert into userinfo (userpwd, phone, registertime, state)
+    values (#{userpwd,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},now(), '使用中')
+  </insert>
+
+  <select id="selectBylogin" resultType="Userinfo">
+    select u.*,p.pcname zpro,p1.pcname zcity from userinfo u
+    left join procity p
+    on u.pro=p.pccode
+    left join procity p1
+    on u.city=p1.pccode
+    where phone = #{param1} and userpwd=#{param2}
+  </select>
+  <select id="selectbyphone" resultType="Userinfo">
+    select <include refid="column"></include> from userinfo where phone=#{param1}
+  </select>
+  <update id="updatepwd">
+    update userinfo set userpwd=#{param2} where userno=#{param1}
+  </update>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.MealtypeMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.Mealtype">
+    <id column="mealno" jdbcType="INTEGER" property="mealno" />
+    <result column="schoolno" jdbcType="INTEGER" property="schoolno" />
+    <result column="mealname" jdbcType="VARCHAR" property="mealname" />
+    <result column="driverno" jdbcType="INTEGER" property="driverno" />
+    <result column="mealcost" jdbcType="DECIMAL" property="mealcost" />
+    <result column="taketime" jdbcType="VARCHAR" property="taketime" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mealtype
+    where mealno = #{mealno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drivers.demo.entity.Mealtype">
+    insert into mealtype (mealno, schoolno, mealname, 
+      driverno, mealcost, taketime, 
+      details)
+    values (#{mealno,jdbcType=INTEGER}, #{schoolno,jdbcType=INTEGER}, #{mealname,jdbcType=VARCHAR}, 
+      #{driverno,jdbcType=INTEGER}, #{mealcost,jdbcType=DECIMAL}, #{taketime,jdbcType=VARCHAR}, 
+      #{details,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.drivers.demo.entity.Mealtype">
+    update mealtype
+    set schoolno = #{schoolno,jdbcType=INTEGER},
+      mealname = #{mealname,jdbcType=VARCHAR},
+      driverno = #{driverno,jdbcType=INTEGER},
+      mealcost = #{mealcost,jdbcType=DECIMAL},
+      taketime = #{taketime,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR}
+    where mealno = #{mealno,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select mealno, schoolno, mealname, driverno, mealcost, taketime, details
+    from mealtype
+    where mealno = #{mealno,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select mealno, schoolno, mealname, driverno, mealcost, taketime, details
+    from mealtype
+  </select>
+</mapper>

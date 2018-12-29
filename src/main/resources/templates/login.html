@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录界面</title>
+    <link rel="shortcut icon" href="//img.58cdn.com.cn/jxedt/logos/favicon.ico?v=20180725" />
+    <link rel="stylesheet" href="//j1.58cdn.com.cn/dist/jxedt/pc/lib/css/reset.css?v=20180725">
+    <link rel="stylesheet" href="//c.58cdn.com.cn/dist/jxedt/pc/products/jxregister/css/registration.css?v=20181130">
+
+    <style type="text/css">
+        .iconfont{
+            color: red;
+            font-size: 14px;
+            height: 20px;
+        }
+        nav{
+            background:rgb(235, 247, 252);
+            height:80px;
+        }
+        .registration .login-guide-main{
+            height:500px;
+            padding-top: 0px;
+        }
+        #btn:hover{
+            background: lightskyblue;
+            color: #0E2D5F;
+        }
+        #wj{
+            font-size: 16px;
+            color: #333333;
+        }
+        #zc:hover,#wj:hover{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="registration">
+    <!--头部-->
+    <nav>
+        <div class="login-guide-nav">
+            <div class="nav-logo">
+                <a href="http://www.jxedt.com">
+                    <img src="//img.58cdn.com.cn/dist/jxedt/pc/products/jxregister/images/logo.png?v=20180725" alt="">
+                </a>
+            </div>
+            <div class="nav-btn">
+            </div>
+         </div>
+    </nav>
+    <article class="login-guide-main">
+        <div class="jx-register">
+            <div class="jx-register-img">
+                <!-- 驾考图片 -->
+            </div>
+        <div class="register-form login-form">
+             <form action="/userinfo/login" method="post" id="loginform">
+                 <h4>登录</h4>
+                 <div class="div-wrap">
+                     <input type="text" name="phone" id="phone" class="register-phone input-success" placeholder="请输入手机号或用户名" autocomplete="off">
+                     <p class="iconfont"></p>
+                 </div>
+                 <div class="pwd-login-to div-wrap">
+                     <input type="password" name="loginpwd" id="loginpwd" class="register-pwd" placeholder="请输入密码" autocomplete="off">
+                     <p class="iconfont" id="errpwd"></p>
+                 </div>
+                 <div class="toggle-div">
+                     <p class="forget-pwd">
+                     <a href="/userinfo/checkpwd" id="wj">忘记密码</a>
+                     </p>
+                 </div>
+                 <div>
+                     <span class="login-submit" id="btn">登录</span>
+                 </div>
+                 <div class="register">
+                      <span>还没有账号？
+                       <a href="/userinfo/checkreg" id="zc">立即注册</a>
+                       </span>
+                 </div>
+             </form>
+        </div>
+    </div>
+</article>
+<footer>
+     <p>郑州市AAA软件教育学院 &nbsp; 豫AAA报备号888888</p>
+</footer>
+</div>
+</body>
+<script src="/easyui/jquery.min.js"></script>
+<script src="/easyui/jquery.easyui.min.js"></script>
+<script src="/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $("#btn").bind("click",function(){
+            if(phoneReg() & pwdReg()){
+                var p=$("#phone").val();
+                var pwd=$("#loginpwd").val();
+                $.ajax({
+                    url:'/userinfo/checkUser',
+                    type:'post',
+                    data:{'phone':p,'loginpwd':pwd},
+                    success:function(data){
+                       if(1==data){
+                           $("#loginform").submit();
+                        }else{
+                           $("#errpwd").css("visibility", "visible");
+                           $("#errpwd").html("账号或密码有误！");
+                        }
+                    }
+                })
+            }
+        })
+        /*-------*/
+        $(".register-phone").keydown(function (e) {
+            if(e.keyCode==32){return false;}
+        });
+        $(".register-pwd").keydown(function (e) {
+            if(e.keyCode==32){return false;}
+        });
+        $(".register-phone").keyup(function (e) {
+            phoneReg();
+        });
+        $(".register-pwd").keyup(function (e) {
+            pwdReg();
+        });
+    });
+    /*手机号验证*/
+    function phoneReg() {
+        var phone = $(".register-phone").val().trim();
+        if (phone == "") {
+            $(".register-phone").next().css("visibility", "visible");
+            $(".register-phone").next().text("请输入手机号或用户名");
+            $(".register-phone").next().next().hide();
+            return false;
+        } else {
+            $(".register-phone").next().css("visibility", "hidden");
+            $(".register-phone").next().text("");
+            $(".register-phone").next().next().show();
+            return true;
+        }
+    }
+    /*密码验证*/
+    function pwdReg() {
+        var pwd = $(".register-pwd").val().trim();
+        if (pwd == "") {
+            $(".register-pwd").next().css("visibility", "visible");
+            $(".register-pwd").next().text("请输入密码");
+            $(".register-pwd").next().next().hide();
+            return false;
+        }else{
+            $(".register-pwd").next().css("visibility", "hidden");
+            $(".register-pwd").next().text("");
+            $(".register-pwd").next().next().show();
+            return true;
+        }
+    }
+</script>
+</html>

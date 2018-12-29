@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.ProcityMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.Procity">
+    <result column="pccode" jdbcType="VARCHAR" property="pccode" />
+    <result column="pcname" jdbcType="VARCHAR" property="pcname" />
+    <result column="parentcode" jdbcType="VARCHAR" property="parentcode" />
+    <result column="pctype" jdbcType="VARCHAR" property="pctype" />
+  </resultMap>
+  <select id="findPro" resultType="Procity">
+    select pccode, pcname, parentcode, pctype
+    from procity where parentcode='1'
+  </select>
+  <select id="findCity" resultType="Procity">
+    select pccode, pcname, parentcode, pctype
+    from procity where parentcode=#{param1}
+  </select>
+</mapper>

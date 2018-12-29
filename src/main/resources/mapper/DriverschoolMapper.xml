@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.DriverschoolMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.Driverschool">
+    <id column="schoolno" jdbcType="INTEGER" property="schoolno" />
+    <result column="schoolname" jdbcType="VARCHAR" property="schoolname" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="esttime" jdbcType="TIMESTAMP" property="esttime" />
+    <result column="survey" jdbcType="VARCHAR" property="survey" />
+    <result column="avgstar" jdbcType="DECIMAL" property="avgstar" />
+    <result column="person" jdbcType="VARCHAR" property="person" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from driverschool
+    where schoolno = #{schoolno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drivers.demo.entity.Driverschool">
+    insert into driverschool (schoolno, schoolname, phone, 
+      img, address, esttime, 
+      survey, avgstar, person, 
+      state)
+    values (#{schoolno,jdbcType=INTEGER}, #{schoolname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{esttime,jdbcType=TIMESTAMP}, 
+      #{survey,jdbcType=VARCHAR}, #{avgstar,jdbcType=DECIMAL}, #{person,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.drivers.demo.entity.Driverschool">
+    update driverschool
+    set schoolname = #{schoolname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      esttime = #{esttime,jdbcType=TIMESTAMP},
+      survey = #{survey,jdbcType=VARCHAR},
+      avgstar = #{avgstar,jdbcType=DECIMAL},
+      person = #{person,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where schoolno = #{schoolno,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select schoolno, schoolname, phone, img, address, esttime, survey, avgstar, person, 
+    state
+    from driverschool
+    where schoolno = #{schoolno,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select schoolno, schoolname, phone, img, address, esttime, survey, avgstar, person, 
+    state
+    from driverschool
+  </select>
+</mapper>

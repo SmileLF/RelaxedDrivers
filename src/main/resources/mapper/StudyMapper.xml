@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.StudyMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.Study">
+    <id column="studyno" jdbcType="INTEGER" property="studyno" />
+    <result column="userno" jdbcType="INTEGER" property="userno" />
+    <result column="studytime" jdbcType="TIMESTAMP" property="studytime" />
+    <result column="driverno" jdbcType="INTEGER" property="driverno" />
+    <result column="subno" jdbcType="INTEGER" property="subno" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from study
+    where studyno = #{studyno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drivers.demo.entity.Study">
+    insert into study (studyno, userno, studytime, 
+      driverno, subno, state
+      )
+    values (#{studyno,jdbcType=INTEGER}, #{userno,jdbcType=INTEGER}, #{studytime,jdbcType=TIMESTAMP}, 
+      #{driverno,jdbcType=INTEGER}, #{subno,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.drivers.demo.entity.Study">
+    update study
+    set userno = #{userno,jdbcType=INTEGER},
+      studytime = #{studytime,jdbcType=TIMESTAMP},
+      driverno = #{driverno,jdbcType=INTEGER},
+      subno = #{subno,jdbcType=INTEGER},
+      state = #{state,jdbcType=VARCHAR}
+    where studyno = #{studyno,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select studyno, userno, studytime, driverno, subno, state
+    from study
+    where studyno = #{studyno,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select studyno, userno, studytime, driverno, subno, state
+    from study
+  </select>
+</mapper>

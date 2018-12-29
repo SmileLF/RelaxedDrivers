@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>修改资料 驾校一点通 用户中心</title>
+
+    <link href="/usercenter_files/ucss.css" type="text/css" rel="stylesheet">
+    <style type="text/css">
+        #btn_up{
+            height: 40px;
+            width: 100px;
+            cursor:pointer;
+            border: 1px;
+            border-radius: 5px;
+            font-size: 16px;
+            color: white;
+            background-color: #00CD00;
+        }
+        #btn_up:hover{
+            background-color: #00FF00;
+        }
+        #indexleft_face{
+            display: inline-block;
+            height: 80px;
+            width:65px;
+            border: 1px solid cornflowerblue;
+        }
+        .input{
+            font-size: 14px;
+            font-family: Arial, '宋体';
+            font-style: normal;
+        }
+    </style>
+    <script type="text/javascript">
+
+        window.onload = function() {
+            display(, , , 0);
+        }
+
+        function display(year,month,day,classic){
+            document.getElementById("bday_sel_year").getElementsByTagName("option")[0].innerHTML=year;
+            document.getElementById("bday_sel_year").getElementsByTagName("option")[0].value=year;
+            document.getElementById("bday_sel_month").getElementsByTagName("option")[0].innerHTML=month;
+            document.getElementById("bday_sel_month").getElementsByTagName("option")[0].value=month;
+            document.getElementById("bday_sel_day").getElementsByTagName("option")[0].innerHTML=day;
+            document.getElementById("bday_sel_day").getElementsByTagName("option")[0].value=day;
+            var identify=document.getElementById("cardtype");
+            if(classic==1){
+                identify.getElementsByTagName("option")[0].innerHTML="身份证";
+                identify.getElementsByTagName("option")[0].value=1;
+            }else if(classic==2){
+                identify.getElementsByTagName("option")[0].innerHTML="侨胞证";
+                identify.getElementsByTagName("option")[0].value=2;
+            }else{
+                identify.getElementsByTagName("option")[0].innerHTML="军官证";
+                identify.getElementsByTagName("option")[0].value=3;
+            }
+        }
+
+    </script>
+    <script type="text/javascript" src="/usercenter_files/common.js"></script>
+    <script>
+        // document.domain='jxedt.com';
+    </script>
+    <script type="text/javascript" src="/usercenter_files/ShowDialog.js"></script>
+    <!--[if ie 6]>
+    <script language="javascript" type="text/javascript" src="//j2.58cdn.com.cn/jxedt/user/scripts/DD_belatedPNG.js"></script>
+    <script type="text/javascript">DD_belatedPNG.fix('.mypngbg'); </script>
+    <![endif]-->
+    <link href="/usercenter_files/ShowDialog.css" rel="stylesheet" type="text/css">
+    <link href="/easyui/themes/default/easyui.css">
+    <script src="/easyui/jquery.min.js"></script>
+    <script src="/easyui/jquery.easyui.min.js"></script>
+    <script src="/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        alert(1);
+        $("#pro").combobox({
+            url:'/procity/findPro',
+            valueField:'pccode',
+            textField:'pcname'
+        });
+    </script>
+</head>
+<body>
+
+<script type="text/javascript" src="/usercenter_files/top.js"></script>
+<div class="top">
+    <div class="logo">
+        <a href="http://www.jxedt.com/"> <img src="/usercenter_files/ulogo.png" alt="驾校一点通" class="mypngbg" width="170" height="48"></a>
+    </div>
+    <div class="minimenu">
+        <a onclick="SetHome(this,'http://www.jxedt.com/')" href="javascript:void(0)" target="_self"> 设为首页</a>|<a onclick="AddFavorite('http://www.jxedt.com/','驾校一点通，学车更轻松')" href="javascript:void(0)" target="_self">加入收藏</a> <a href="http://user.jxedt.com/loginout">退出</a>
+
+    </div>
+</div>
+<div class="menubg">
+    <div class="menu">
+        <ul>
+            <li class="menuon"><a href="usercenter.html">会员中心</a></li>
+            <li class=""><a href="http://user.jxedt.com/changepwd">修改密码</a></li>
+            <li class=""><a href="http://user.jxedt.com/alipay/index">购买VIP</a></li>
+            <li class=""><a href="http://user.jxedt.com/financial">账户余额</a></li>
+            <!--<li class=""><a href="/myBaoXian">学车保险</a></li>-->
+        </ul>
+    </div>
+</div>
+
+<div class="main">
+    <div class="left">
+
+        <div class="indexleft">
+            <div class="uinfo">
+                <div class="umenu">
+                    <div class="bginfo"></div>
+                </div>
+                <div class="uface">
+                    <div class="picmidddiv">
+                        <div class="picmidd">
+                            <!-- <a href="face" title="我要修改头像"> -->
+                            <a href="#" title="我要修改头像">
+                                <img th:src="@{'/upload/'+${session.user.headimg}}" id="indexleft_face" alt="我要修改头像"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="udeta" style="width:150px;">
+                    欢迎您:
+                    <span><a href="" th:text="${session.user.nickname }"></a></span><br>
+                    账户余额， 0.00元 <br>&nbsp;&nbsp;&nbsp;<a style="color: #ff0000" href="http://user.jxedt.com/financial">查看充值记录</a>
+                </div>
+            </div>
+            <div class="links">
+                <div class="umenu">
+                    <div class="bglink"></div>
+                </div>
+                <dl class="fir">
+                    <dt class="mn1"></dt>
+                    <dd class="fd">
+                        <a href="http://m.jxedt.com/about/" target="_blank">驾校一点通（手机版）</a>
+                    </dd>
+                    <dd>手机版网址：m.jxedt.com</dd>
+                </dl>
+                <dl>
+                    <dt class="mn2"></dt>
+                    <dd class="fd">
+                        <a href="http://vip.jxedt.com/" target="_blank">仿真试题（vip版）</a>
+                    </dd>
+                    <dd>
+                        <a href="http://mnks.jxedt.com/" target="_blank">模拟考试（免费版）</a>
+                    </dd>
+                </dl>
+                <ul class="alllink">
+                    <li><a href="http://bbs.jxedt.com/" target="_blank">学车论坛</a></li>
+                    <li><a href="http://jiaxiao.jxedt.com/" target="_blank">驾校平台</a></li>
+                    <li><a href="http://jl.jxedt.com/" target="_blank">教练平台</a></li>
+                    <li><a href="http://pl.jxedt.com/" target="_blank">陪练平台</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>		<div class="right">
+    <div class="title">
+        <div class="bg">
+            <h2>
+                个人中心<span class="jiantou"></span>
+            </h2>
+        </div>
+    </div>
+    <div class="content">
+        <div class="bg">
+            <h3>个人信息</h3>
+                <ul>
+                    <li class="sub">手 &nbsp;机&nbsp;号：</li>
+                    <li class="input" th:text="${session.user.phone }"></li>
+                    <li class="info"><span class="wronginfo"></span></li>
+                    <li class="sub">昵 &nbsp; &nbsp; 称：</li>
+                    <li class="input" th:text="${session.user.nickname }"></li>
+                    <li class="info"></li>
+                    <li class="sub">邮 &nbsp; &nbsp; 箱：</li>
+                    <li class="input" th:text="${session.user.mailbox }"></li>
+                    <li class="info"><span class="wronginfo" ></span></li>
+                    <li class="sub">性 &nbsp; &nbsp; 别：</li>
+                    <li class="input" th:text="${session.user.sex }"></li>
+                    <li class="sub">证 件 类 型：</li>
+                    <li class="input"th:text="${session.user.documentno==1?'身份证':'军官证' }"></li>
+                    <li class="info"><span></span></li>
+                    <li class="sub">证 件 号 码：</li>
+                    <li class="input" th:text="${session.user.idno }"></li>
+                    <li class="info"><span></span></li>
+                    <li class="sub">地 &nbsp; &nbsp; 址：</li>
+                    <li class="input">
+                        <span th:text="${session.user.zpro }"></span>
+                        <span th:text="${session.user.zcity }"></span>
+                        <span th:text="${session.user.address }"></span>
+                    </li>
+                    <li class="info" style="width: 200px; overflow: hidden"></li>
+                    <li class="sub"></li>
+                    <li class="submit"><input type="submit" value="完善信息" id="btn_up"></li>
+                    <li class="sub"></li>
+                    <li class="input"></li>
+                    <li class="info"></li>
+                </ul>
+            <div class="clear"></div>
+        </div>
+</div>
+</div>
+</div>
+
+
+<div class="clear"></div>
+<div class="foot">
+    <div class="footcon">
+        <a href="http://www.jxedt.com/about/jianjie.asp" target="_blank">网站介绍</a>
+        | <a href="http://www.jxedt.com/about/sitemap.asp" target="_blank">网站地图</a>
+        | <a href="http://www.jxedt.com/about/link.asp" target="_blank">
+        合作链接</a> | <a href="http://www.jxedt.com/about/laws.asp" target="_blank">免责声明</a>
+        | <a href="http://www.jxedt.com/about/lianxi.asp" target="_blank">联系我们</a>
+        | <a href="http://www.jxedt.com/about/index.asp" target="_blank">意见反馈</a><br>
+        Copyright <span style="font-family: arial;">©</span> 2004-2015
+        驾校一点通 JXEDT.COM 版权所有 浙ICP备09002072号
+    </div>
+</div>
+
+
+<!--模态框-->
+<div id="update">
+    <h3>个人信息</h3>
+    <form action="/userinfo/editinfo" method="post">
+        <table>
+            <tr>
+                <td>手机号:</td>
+                <td><li class="input" th:text="${session.user.phone }"></li></td>
+            </tr>
+            <tr>
+                <td>昵称:</td>
+                <td><input name="nickname" type="text" th:value="${session.user.nickname }"></td>
+            </tr>
+            <tr>
+                <td>邮箱:</td>
+                <td><input name="mailbox" type="text" th:value="${session.user.mailbox }"></td>
+            </tr>
+            <tr>
+                <td>性别:</td>
+                <td>
+                    <input type="radio" name="sex" value="男" th:checked="${session.user.sex=='男'}">男
+                    <input type="radio" name="sex" value="女" th:checked="${session.user.sex=='女'}">女
+                </td>
+            </tr>
+            <tr>
+                <td>证件类型:</td>
+                <td>
+                    <select name="documentno">
+                        <option value="1" th:selected="${session.user.documentno==1 }">身份证</option>
+                        <option value="2" th:selected="${session.user.documentno==2 }">军官证</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>证件号码:</td>
+                <td><input name="idno" type="text" th:value="${session.user.idno }"></td>
+            </tr>
+            <tr>
+                <td>省市:</td>
+                <td>
+                    <input id="pro" name="pro" value="aa">
+                    <input id="city" name="city" class="easyui-combobox" >
+
+                </td>
+            </tr>
+            <tr>
+                <td>详细地址:</td>
+                <td>
+                    <input type="text" th:value="${session.user.address }">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="确定修改" id="btn_submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div class="clear"></div>
+</div>
+
+
+<script src="/usercenter_files/myajax.js" type="text/javascript"></script>
+
+<script src="/usercenter_files/ShowDialog_002.js" type="text/javascript"></script>
+
+
+<script src="/usercenter_files/referrer_jxedt_pc.js"></script>
+<style></style></body></html>

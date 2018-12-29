@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.HtPrivilegsMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.HtPrivilegs">
+    <id column="pno" jdbcType="INTEGER" property="pno" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="purl" jdbcType="VARCHAR" property="purl" />
+    <result column="parentno" jdbcType="INTEGER" property="parentno" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ht_privilegs
+    where pno = #{pno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drivers.demo.entity.HtPrivilegs">
+    insert into ht_privilegs (pno, pname, purl, 
+      parentno)
+    values (#{pno,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{purl,jdbcType=VARCHAR}, 
+      #{parentno,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.drivers.demo.entity.HtPrivilegs">
+    update ht_privilegs
+    set pname = #{pname,jdbcType=VARCHAR},
+      purl = #{purl,jdbcType=VARCHAR},
+      parentno = #{parentno,jdbcType=INTEGER}
+    where pno = #{pno,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select pno, pname, purl, parentno
+    from ht_privilegs
+    where pno = #{pno,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select pno, pname, purl, parentno
+    from ht_privilegs
+  </select>
+</mapper>

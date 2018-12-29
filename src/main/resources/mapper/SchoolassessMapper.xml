@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.drivers.demo.dao.SchoolassessMapper">
+  <resultMap id="BaseResultMap" type="com.drivers.demo.entity.Schoolassess">
+    <id column="assessno" jdbcType="INTEGER" property="assessno" />
+    <result column="schoolno" jdbcType="INTEGER" property="schoolno" />
+    <result column="userno" jdbcType="INTEGER" property="userno" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="star" jdbcType="DECIMAL" property="star" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from schoolassess
+    where assessno = #{assessno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.drivers.demo.entity.Schoolassess">
+    insert into schoolassess (assessno, schoolno, userno, 
+      content, star, time, 
+      state)
+    values (#{assessno,jdbcType=INTEGER}, #{schoolno,jdbcType=INTEGER}, #{userno,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{star,jdbcType=DECIMAL}, #{time,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.drivers.demo.entity.Schoolassess">
+    update schoolassess
+    set schoolno = #{schoolno,jdbcType=INTEGER},
+      userno = #{userno,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      star = #{star,jdbcType=DECIMAL},
+      time = #{time,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=VARCHAR}
+    where assessno = #{assessno,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select assessno, schoolno, userno, content, star, time, state
+    from schoolassess
+    where assessno = #{assessno,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select assessno, schoolno, userno, content, star, time, state
+    from schoolassess
+  </select>
+</mapper>

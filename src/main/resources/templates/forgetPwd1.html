@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Author" contect="http://www.webqin.net">
+    <title>忘记密码</title>
+    <link rel="shortcut icon" href="//img.58cdn.com.cn/jxedt/logos/favicon.ico?v=20180725" />
+    <link rel="stylesheet" href="//j1.58cdn.com.cn/dist/jxedt/pc/lib/css/reset.css?v=20180725">
+    <link rel="stylesheet" href="//c.58cdn.com.cn/dist/jxedt/pc/products/jxregister/css/registration.css?v=20181130">
+    <link type="text/css" href="/css/css.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
+    <style type="text/css">
+        .registration{
+            background:rgb(235, 247, 252);
+        }
+        .forget-pwd dd #btn{
+            width: 120px;
+            height: 29px;
+            cursor: pointer;
+            background: #00C356;
+            color: white;
+            border-radius:5px;
+            border: 0px;
+        }
+        .subtijiao input{
+            background: #00C356;
+            border-radius: 5px;
+        }
+    </style>
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var sleep=30, interval=null;
+            $("#btn").click(function () {
+                var sj=$("#aphone").val();
+                if(sj==""){
+                    $.messager.alert('警告','请输入手机手机号！');
+                    return false;
+                }else {
+                    if (!interval) {
+                        this.style.backgroundColor = 'rgb(243, 182, 182)';
+                        this.disabled = "disabled";
+                        this.style.cursor = "wait";
+                        this.value = "重新发送 (" + sleep-- + ")";
+                        interval = setInterval(function () {
+                            if (sleep == 0) {
+                                if (!!interval) {
+                                    clearInterval(interval);
+                                    interval = null;
+                                    sleep = 30;
+                                    btn.style.cursor = "pointer";
+                                    btn.removeAttribute('disabled');
+                                    btn.value = "免费获取验证码";
+                                    btn.style.backgroundColor = '';
+                                }
+                                return false;
+                            }
+                            btn.value = "重新发送 (" + sleep-- + ")";
+                        }, 1000);
+                        //触发后台事件
+                        var phone = $("#aphone").val();
+                        $.ajax({
+                            url: "/userinfo/phonere",
+                            type: "post",
+                            data: {
+                                phones: phone
+                            },
+                            success: function (data) {
+                                $("#error").val(data);
+                            },
+                            datatype: "text",
+                        });
+                    }
+                }
+            });
+
+
+            // 提交事件
+            $("#commit").click(function () {
+                var p=$("#aphone").val();
+                if(""==p){
+                    $.messager.alert('警告','请输入手机手机号！');
+                    return false;
+                }else {
+                    if (check()) {
+                        $.ajax({
+                            url: '/userinfo/findbyphone',
+                            type: 'post',
+                            data: {phone: p},
+                            datatype: "text",
+                            success: function (data) {
+                                if (1 == data) {
+                                    $("#frmcommit").submit();
+                                } else {
+                                    $.messager.alert('错误', '该手机号未注册');
+                                    return false;
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+        })
+        function check(){
+            var yzm=$("#yzm").val();
+            var error=$("#error").val();
+            if(null==yzm  || yzm=="" || yzm.length==0){
+                $.messager.alert('警告','验证码不能为空');
+                return false;
+            }else{
+                if(yzm!=error && null!=error){
+                    $.messager.alert('警告','验证码不正确');
+                    return false;
+                }
+                return true;
+            }
+        }
+    </script>
+</head>
+
+<body>
+<div class="registration">
+    <nav>
+        <div class="login-guide-nav">
+            <div class="nav-logo">
+                <a href="http://www.jxedt.com">
+                    <img src="//img.58cdn.com.cn/dist/jxedt/pc/products/jxregister/images/logo.png?v=20180725" alt="">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="web-width">
+            <div class="for-liucheng">
+                <div class="liulist for-cur"></div>
+                <div class="liulist"></div>
+                <div class="liulist"></div>
+                <div class="liutextbox">
+                    <div class="liutext for-cur"><em>1</em><br /><strong>填写验证信息</strong></div>
+                    <div class="liutext"><em>2</em><br /><strong>设置新密码</strong></div>
+                    <div class="liutext"><em>3</em><br /><strong>完成</strong></div>
+                </div>
+            </div><!--for-liucheng/-->
+            <form class="forget-pwd" id="frmcommit" action="/userinfo/findbyphone1" method="post">
+                <dl class="sel-yzsj">
+                    <dt>已验证手机：</dt>
+                    <dd><input type="text" id="aphone" name="phone"/></dd>
+                    <div class="clears"></div>
+                </dl>
+                <dl>
+                    <dt>手机校验码：</dt>
+                    <dd><input type="text" id="yzm" name="yzm">
+                        <input type="button" id="btn" value="免费获取验证码">
+                        <input type="hidden" id="error" name="error">
+                    </dd>
+                    <div class="clears"></div>
+                </dl>
+                <div class="subtijiao"><input type="button" value="提交" id="commit"/></div>
+            </form><!--forget-pwd/-->
+        </div><!--web-width/-->
+    </div><!--content/-->
+</div>
+</body>
+</html>

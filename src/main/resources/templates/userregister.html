@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>chuce</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://img.58cdn.com.cn/jxedt/logos/favicon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="/login_files/font_949786_v8zsbvaxz6p.css">
+    <link rel="stylesheet" href="/login_files/reset.css">
+    <link rel="stylesheet" href="/login_files/registration.css">
+    <style>
+        .down-popup li{
+            margin: 10px 0;
+            padding: 0;
+            height: 20px;
+            text-decoration: none;
+            line-height: 20px;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+        }
+        .down-popup li a{
+            font-size: 12px;
+            color: #999999;
+        }
+        .down-popup li a:hover{
+            color: #00c356;
+        }
+    </style>
+    <script type="text/javascript" charset="UTF-8" async="" src="/login_files/plugins.js"></script>
+    <script type="text/javascript" charset="UTF-8" async="" src="/login_files/tool.js"></script>
+    <script type="text/javascript" charset="UTF-8" async="" src="/login_files/core.js"></script>
+    <script type="text/javascript" charset="UTF-8" async="" src="/login_files/light.js"></script>
+    <script type="text/javascript" charset="UTF-8" async="" src="/login_files/watchman.js"></script>
+</head>
+
+<body>
+<div class="registration">
+    <article class="login-guide-main">
+        <div class="jx-register">
+            <div class="jx-register-img">
+            </div>
+            <div class="register-form jx-register-form">
+                <form action="/userinfo/register" autocomplete="off" id="registerfrom" method="post">
+                    <h4>学员注册</h4>
+
+                    <div class="div-wrap">
+                        <input type="text" name="phone" class="register-phone" placeholder="请输入手机号">
+                        <p class="iconfont icon-jinggao" id="p">
+                        </p>
+                        <i></i>
+                    </div>
+                    <div class="div-wrap">
+                        <input type="password" name="userpwd" class="register-pwd" placeholder="请输入密码 (字母、数字或者符号，最短8位)">
+                        <p class="iconfont icon-jinggao">
+                        </p>
+                        <i></i>
+                    </div>
+                    <div class="code-block div-wrap">
+                        <input type="hidden" id="reyzm" name="reyzm">
+                        <input type="text" name="indexccode" class="register-code" placeholder="请输入验证码">
+                        <span class="register-code-btn">发送验证码</span>
+                        <p class="iconfont icon-jinggao">
+                        </p>
+                        <i></i>
+                    </div>
+                    <div class="captcha-block">
+                        <div id="captcha"><input type="hidden" name="NECaptchaValidate" value="" class="yidun_input"></div>
+                        <p class="iconfont icon-jinggao"></p>
+                    </div>
+                    <div>
+                        <span class="register-submit">注册</span>
+                    </div>
+                    <div>
+                        <label for="register_checkbox">
+                            <input type="checkbox" name="" id="register_checkbox" class="register-checkbox" checked="checked">
+                            <span>我已阅读并接受
+                                <a href="/userinfo/checkclause" target="_blank">《注册条款》</a>
+                            </span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </article>
+    <footer>
+        <p>郑州市AAA软件教育学院 &nbsp; 豫AAA报备号888888</p>
+    </footer>
+</div>
+
+<script type="text/javascript">
+    var sessionid = "788c3f4000ef4fcbb5f2ce8b06a4aec4";
+</script>
+<script src="/login_files/load.js"></script>
+<script src="/login_files/jquery.js"></script>
+<script src="/login_files/register.js"></script>
+
+</body></html>
